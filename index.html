@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Ecem balat ❤ doğu balat</title>
+
+  <!-- Google Fonts - el yazısı -->
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{
+      font-family: 'Poppins', sans-serif;
+      background: radial-gradient(circle at 10% 10%, #fff0f6 0%, #ffd6e8 20%, #ffc1d0 50%, #ff9ab3 100%);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+      color:#222;
+    }
+
+    .card{
+      width:100%;
+      max-width:880px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.85), rgba(255,255,255,0.75));
+      border-radius:24px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.12), inset 0 1px 0 rgba(255,255,255,0.6);
+      padding:36px;
+      position:relative;
+      overflow:hidden;
+      text-align:center;
+    }
+
+    h1{
+      font-size: clamp(28px, 4vw, 42px);
+      letter-spacing:1px;
+      margin-bottom:8px;
+      color:#4b0f2a;
+    }
+    p.lead{
+      margin-bottom:22px;
+      color:#5b2338;
+      font-size: clamp(14px, 2.2vw, 18px);
+      opacity:0.95;
+    }
+
+    .heart-wrap{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:20px;
+      flex-wrap:wrap;
+    }
+
+    .big-heart{
+      width:260px;
+      height:240px;
+      position:relative;
+      animation: beat 1.05s infinite ease-in-out;
+      filter: drop-shadow(0 8px 18px rgba(204,0,102,0.18));
+      cursor:pointer;
+    }
+
+    .heart-shape{
+      position:absolute;
+      left:50%;
+      top:50%;
+      transform:translate(-50%,-50%) rotate(-45deg);
+      width:140px;
+      height:140px;
+      background: linear-gradient(135deg,#ff3f72 0%, #ff6fa3 60%, #ff9fc4 100%);
+      border-radius:20px 20px 0 0;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    }
+    .heart-shape::before,
+    .heart-shape::after{
+      content:"";
+      position:absolute;
+      width:140px;
+      height:140px;
+      background:inherit;
+      border-radius:50%;
+      top:-70px;
+      left:0;
+    }
+    .heart-shape::after{
+      left:70px;
+      top:0;
+    }
+
+    .names{
+      position:absolute;
+      left:50%;
+      top:50%;
+      transform:translate(-50%,-50%) rotate(45deg);
+      width:220px;
+      text-align:center;
+      pointer-events:none;
+      font-family: 'Great Vibes', cursive;
+    }
+    .names .a{
+      font-weight:700;
+      color:white;
+      font-size:32px;
+      text-shadow: 0 2px 6px rgba(0,0,0,0.25);
+      display:block;
+      line-height:1;
+    }
+    .names .b{
+      color:rgba(255,255,255,0.9);
+      font-size:22px;
+      margin-top:4px;
+    }
+
+    .floating{
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+    }
+    .floating i{
+      position:absolute;
+      width:18px;height:18px;
+      transform:rotate(-45deg);
+      background:linear-gradient(135deg,#ff9fbf 0%, #ff578a 100%);
+      border-radius:4px 4px 0 0;
+      opacity:0.9;
+      animation: floatUp linear infinite;
+    }
+    .floating i::before,
+    .floating i::after{
+      content:"";
+      position:absolute;
+      width:18px;height:18px;
+      background:inherit;
+      border-radius:50%;
+      top:-9px;
+      left:0;
+    }
+    .floating i::after{
+      left:9px; top:0;
+    }
+
+    .foot{
+      margin-top:22px;
+      font-size:13px;
+      color:#5b2a3a;
+      opacity:0.95;
+    }
+
+    /* Sürpriz mesaj popup */
+    .popup{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,0.6);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      visibility:hidden;
+      opacity:0;
+      transition:all 0.3s ease;
+    }
+    .popup.active{
+      visibility:visible;
+      opacity:1;
+    }
+    .popup-content{
+      background:white;
+      padding:28px 34px;
+      border-radius:16px;
+      max-width:420px;
+      text-align:center;
+      font-family:'Great Vibes', cursive;
+      font-size:28px;
+      color:#e02a6e;
+      box-shadow:0 10px 25px rgba(0,0,0,0.25);
+      animation: popupIn .4s ease;
+    }
+    .popup-content button{
+      margin-top:16px;
+      background:#e02a6e;
+      color:white;
+      border:none;
+      border-radius:8px;
+      padding:8px 18px;
+      cursor:pointer;
+      font-size:16px;
+    }
+
+    @keyframes popupIn{
+      from{transform:scale(0.8);opacity:0}
+      to{transform:scale(1);opacity:1}
+    }
+
+    @keyframes beat{
+      0%{transform:scale(1)}
+      14%{transform:scale(1.12)}
+      28%{transform:scale(0.98)}
+      42%{transform:scale(1.06)}
+      70%{transform:scale(1)}
+      100%{transform:scale(1)}
+    }
+    @keyframes floatUp{
+      0%{transform:translateY(40px) scale(0.8); opacity:0}
+      10%{opacity:1}
+      100%{transform:translateY(-220px) scale(1.1); opacity:0}
+    }
+  </style>
+</head>
+<body>
+
+  <main class="card" role="main">
+    <h1>Ecem balat ❤ doğu balat</h1>
+    <p class="lead">Bir tıkla kalbin sırrını öğren 💌</p>
+
+    <div class="heart-wrap">
+      <div class="big-heart" id="heart">
+        <div class="heart-shape"></div>
+        <div class="names">
+          <span class="a">Ecem balat</span>
+          <span class="b">&</span>
+          <span class="a">doğu balat</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="foot">Kalbe tıklarsan sürpriz gelir 💞</div>
+
+    <!-- Dekoratif kalpler -->
+    <div class="floating" aria-hidden="true">
+      <i style="left:8%; bottom:10%; animation-duration:7s; animation-delay:0s;"></i>
+      <i style="left:22%; bottom:5%; animation-duration:9s; animation-delay:1s;"></i>
+      <i style="left:38%; bottom:20%; animation-duration:8s; animation-delay:.5s;"></i>
+      <i style="left:56%; bottom:8%; animation-duration:10s; animation-delay:1.2s;"></i>
+      <i style="left:74%; bottom:18%; animation-duration:7.5s; animation-delay:.3s;"></i>
+      <i style="left:88%; bottom:6%; animation-duration:9.2s; animation-delay:.9s;"></i>
+    </div>
+  </main>
+
+  <!-- Popup -->
+  <div class="popup" id="popup">
+    <div class="popup-content">
+      💖 Sürpriz Mesaj 💖<br><br>
+      “Gerçek aşk, birbirine bakmak değil; <br>
+      aynı yöne birlikte bakmaktır.” <br><br>
+      Ecem & Doğu sonsuza dek 💞
+      <br><button id="closeBtn">Kapat</button>
+    </div>
+  </div>
+
+  <script>
+    const heart = document.getElementById("heart");
+    const popup = document.getElementById("popup");
+    const closeBtn = document.getElementById("closeBtn");
+
+    heart.addEventListener("click", ()=> popup.classList.add("active"));
+    closeBtn.addEventListener("click", ()=> popup.classList.remove("active"));
+  </script>
+
+</body>
+</html>
